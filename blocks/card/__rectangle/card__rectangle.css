@@ -1,0 +1,7 @@
+.card__rectangle {
+  width: 282px;
+  height: 79px;
+  background-color: #fff;
+  display: flex;
+  box-sizing: border-box;
+}
