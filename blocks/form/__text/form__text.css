@@ -1,4 +1,4 @@
-.popup__text {
+.form__text {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   max-width: 358px;
@@ -16,11 +16,11 @@
   line-height: 1.21;
 }
 
-.popup__text:last-of-type {
+.form__text:last-of-type {
   margin-top: 30px;
 }
 
-.popup__text:focus {
+.form__text:focus {
   outline: none;
   border: 2px solid blue;
   border-radius: 3px;

@@ -1,4 +1,4 @@
-.popup__submitButton {
+.form__submitButton {
   background-image: url(../../../images/SubmitButton.svg);
   background-color: black;
   width: 358px;
@@ -6,7 +6,7 @@
   margin-top: 48px;
 }
 
-.popup__submitButton:hover {
+.form__submitButton:hover {
   opacity: .8;
   cursor: pointer;
 }

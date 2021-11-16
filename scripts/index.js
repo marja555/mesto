@@ -17,10 +17,25 @@ function closePopup() {
 
 closeButton.addEventListener('click', closePopup);
 
-let formElement = document.querySelector('.popup__submitButton');
-let nameInput = popup.querySelector('popup__text_type_name');
-let jobInput = popup.querySelector('popup__text_type_profession');
+let formElement = document.querySelector('.form');
+let nameInput = formElement.querySelector('.form__text_type_name');
+let jobInput = formElement.querySelector('.form__text_type_profession');
+let profileName = document.querySelector('.profile__name');
+let profileProfession = document.querySelector('.profile__profession');
+nameInput.value = profileName.textContent;
+jobInput.value = profileProfession.textContent;
+
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileProfession.textContent = jobInput.value;
+  closePopup();
 }
+
+function formSubmitDone () {
+  alert('Готово!');
+}
+
+formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('click', formSubmitDone);
