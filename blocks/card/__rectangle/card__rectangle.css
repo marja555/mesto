@@ -1,7 +1,9 @@
 .card__rectangle {
-  width: 282px;
-  height: 79px;
+  max-width: 282px;
   background-color: #fff;
-  display: flex;
   box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-rows: 1fr;
+  align-items: center;
 }

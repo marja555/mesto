@@ -1,6 +1,7 @@
 .form__submit-button {
   background-image: url(../../../images/SubmitButton.svg);
   background-color: black;
+  border: none;
   width: 358px;
   height: 50px;
   margin-top: 48px;
