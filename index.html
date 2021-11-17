@@ -17,69 +17,69 @@
             <img src="./images/kusto.jpg" class="profile__image" alt="Жак Кусто">
             <div class="profile__info-container">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__editButton"></button>
+              <button type="button" class="profile__edit-button"></button>
               <p class="profile__profession">Исследователь океана</p>
             </div>
           </div>  
-          <button class="profile__addButton"></button>
+          <button type="button" class="profile__add-button"></button>
         </section>
         <section class="cards">
           <div class="card">
             <img src="./images/karachaevsk.jpg" class="card__image" alt="Карачаевск">
             <div class="card__rectangle">
-              <h3 class="card__title">Карачаевск</h3>
-              <div class="card__like-img"></div>
+              <h2 class="card__title">Карачаевск</h2>
+              <button type="button" class="card__like-img"></button>
             </div>
           </div>
           <div class="card">
             <img src="./images/elbrus.jpg" class="card__image" alt="Гора Эльбрус">
             <div class="card__rectangle">
-              <h3 class="card__title">Гора Эльбрус</h3>
-              <div class="card__like-img"></div>
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <button type="button" class="card__like-img"></button>
             </div>
           </div>
           <div class="card">
             <img src="./images/dombay.jpg" class="card__image" alt="Домбай">
             <div class="card__rectangle">
-              <h3 class="card__title">Домбай</h3>
-              <div class="card__like-img"></div>
+              <h2 class="card__title">Домбай</h2>
+              <button type="button" class="card__like-img"></button>
             </div>
           </div>
           <div class="card">
             <img src="./images/elbrus.jpg" class="card__image" alt="Гора Эльбрус">
             <div class="card__rectangle">
-              <h3 class="card__title">Гора Эльбрус</h3>
-              <div class="card__like-img"></div>
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <button type="button" class="card__like-img"></button>
             </div>
           </div>
           <div class="card">
             <img src="./images/dombay.jpg" class="card__image" alt="Домбай">
             <div class="card__rectangle">
-              <h3 class="card__title">Домбай</h3>
-              <div class="card__like-img"></div>
+              <h2 class="card__title">Домбай</h2>
+              <button type="button" class="card__like-img"></button>
             </div>
           </div>
           <div class="card">
             <img src="./images/karachaevsk.jpg" class="card__image" alt="Карачаевск">
             <div class="card__rectangle">
-              <h3 class="card__title">Карачаево-Черкесия</h3>
-              <div class="card__like-img"></div>
+              <h2 class="card__title">Карачаево-Черкесия</h2>
+              <button type="button" class="card__like-img"></button>
             </div>
           </div>
         </section>
       </main>
       <footer class="footer">
-        &copy; 2021 Mesto Russia
+        <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
       </footer>
     </div>
     <div class="popup">
       <div class="popup__container">
-        <button class="popup__close"></button>
+        <button type="button" class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="form">
-          <input type="text" value="Жак-Ив Кусто" size="40" class="form__text form__text_type_name">
-          <input type="text" value="Исследователь океана" size="40" class="form__text form__text_type_profession">
-          <button type="submit" class="form__submitButton"></button>
+        <form name="edit-form" class="form">
+          <input type="text" name="name" value="Жак-Ив Кусто" size="40" class="form__text form__text_type_name">
+          <input type="text" name="job" value="Исследователь океана" size="40" class="form__text form__text_type_profession">
+          <button type="submit" class="form__submit-button"></button>
         </form>
       </div>
     </div>

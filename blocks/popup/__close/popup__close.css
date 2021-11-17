@@ -8,4 +8,9 @@
   right: -40px;
   top: -40px;
   cursor: pointer;
+  transition: opacity 1s linear .1s;
+}
+
+.popup__close:hover {
+  opacity: .6;
 }
