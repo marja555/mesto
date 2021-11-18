@@ -13,4 +13,4 @@
 Весь сайт создан посредством _html, css_ и _JS_. Свойства,  использованные в проекте, поддерживает большинство существующих браузеров.
 
 ## Ссылка на GitHub Pages:
-https://github.com/marja555/mesto/index.html
+https://marja555.github.io/mesto/index.html
