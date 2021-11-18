@@ -2,8 +2,7 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   max-width: 358px;
-  min-height: 27px;
-  margin-top: 54px;
+  margin: 30px auto 0;
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -16,12 +15,22 @@
   line-height: 1.21;
 }
 
-.form__text:last-of-type {
-  margin-top: 30px;
+.form__text:first-of-type {
+  margin-top: 54px;
 }
 
 .form__text:focus {
   outline: none;
   border: 2px solid blue;
   border-radius: 3px;
+}
+
+@media screen and (max-width: 700px) {
+  .form__text {
+    max-width: 238px;
+  }
+
+  .form__text:first-of-type {
+    margin-top: 75px;
+  }
 }

@@ -9,8 +9,19 @@
   top: -40px;
   cursor: pointer;
   transition: opacity 1s linear .1s;
+  padding: 0;
 }
 
 .popup__close:hover {
   opacity: .6;
+}
+
+@media screen and (max-width: 700px) {
+  .popup__close {
+    right: 4px;
+    top: -36px;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+  }
 }
