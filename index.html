@@ -24,48 +24,16 @@
           <button type="button" class="profile__add-button"></button>
         </section>
         <section class="cards">
-          <div class="card">
-            <img src="./images/karachaevsk.jpg" class="card__image" alt="Карачаевск">
-            <div class="card__rectangle">
-              <h2 class="card__title">Карачаевск</h2>
-              <button type="button" class="card__like-img"></button>
+          <template id="cardTemplate">
+            <div class="card">
+              <img src="" class="card__image">
+              <button type="button" class="card__del-button"></button>
+              <div class="card__rectangle">
+                <h2 class="card__title"></h2>
+                <button type="button" class="card__like"></button>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <img src="./images/elbrus.jpg" class="card__image" alt="Гора Эльбрус">
-            <div class="card__rectangle">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="card__like-img"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/dombay.jpg" class="card__image" alt="Домбай">
-            <div class="card__rectangle">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="card__like-img"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/elbrus.jpg" class="card__image" alt="Гора Эльбрус">
-            <div class="card__rectangle">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="card__like-img"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/dombay.jpg" class="card__image" alt="Домбай">
-            <div class="card__rectangle">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="card__like-img"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/karachaevsk.jpg" class="card__image" alt="Карачаевск">
-            <div class="card__rectangle">
-              <h2 class="card__title">Карачаево-Черкесия</h2>
-              <button type="button" class="card__like-img"></button>
-            </div>
-          </div>
+          </template>
         </section>
       </main>
       <footer class="footer">
