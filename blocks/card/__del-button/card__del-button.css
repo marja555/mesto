@@ -8,8 +8,10 @@
   padding: 0;
   border: none;
   transition: opacity 1s linear .1s;
+  background-color: transparent;
 }
 
 .card__del-button:hover {
   opacity: .6;
+  cursor: pointer;
 }
