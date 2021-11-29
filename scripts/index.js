@@ -11,17 +11,13 @@ const profileProfession = document.querySelector('.profile__profession');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupPlace = document.querySelector('.popup_type_place');
 const popupPic = document.querySelector('.popup_type_pic');
-const popupBigImage = popupPic.querySelector('.popup__pic');
-const popupPicTitle = popupPic.querySelector('.popup__pic-title');
 const closePopupProfileBtn = popupProfile.querySelector('.popup__close');
 const closePopupPlaceBtn = popupPlace.querySelector('.popup__close');
 const closePopupPicBtn = popupPic.querySelector('.popup__close');
 const addButton = profile.querySelector('.profile__add-button');
 const placeInput = document.querySelector('.form__text_type_place');
 const photoInput = document.querySelector('.form__text_type_photo-link');
-const cardTemplate = document.querySelector('#cardTemplate').content;
 const cardsOnline = document.querySelector('.cards');
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -90,19 +86,17 @@ function formPlaceSubmitHandler (evt) {
 
   closePopup(popupPlace);
 
-  inputs = {
-    name: '',
-    link: '',
-    alt: ''
-  };
+  placeInput.value = '';
+  photoInput.value = '';  
 }
 
 function getCard(el) {
+  const cardTemplate = document.querySelector('#cardTemplate').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardPicture = cardElement.querySelector('.card__image');
   cardElement.querySelector('.card__title').textContent = el.name;
   cardPicture.src = el.link;
-  cardElement.querySelector('.card__image').alt = el.alt;
+  cardPicture.alt = el.alt;
 
   const delButton = cardElement.querySelector('.card__del-button');
   delButton.addEventListener('click', handleDelete);
@@ -138,8 +132,11 @@ function handleLike (event) {
 function handleImgClick (event) {
   const eventTarget = event.target;
   const cardItem = eventTarget.closest('.card');
+  const popupBigImage = document.querySelector('.popup__pic');
+  const popupPicTitle = document.querySelector('.popup__pic-title');
   popupPicTitle.textContent = cardItem.textContent;
   popupBigImage.src = cardItem.querySelector('.card__image').src;
+  openPopupPlace(popupPic);
 }
 
 addButton.addEventListener('click', () => {
