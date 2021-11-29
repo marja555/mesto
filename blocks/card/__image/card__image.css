@@ -4,4 +4,10 @@
   box-sizing: border-box;
   display: block;
   object-fit: cover;
+  transition: opacity 1s linear .1s;
+}
+
+.card__image:hover {
+  cursor: pointer;
+  opacity: .7;
 }

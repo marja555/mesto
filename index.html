@@ -45,8 +45,8 @@
         <button type="button" class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
         <form name="edit-form" class="form form_type_profile">
-          <input type="text" name="name" value="" placeholder="Жак-Ив Кусто" size="40" class="form__text form__text_type_name">
-          <input type="text" name="job" value="" placeholder="Исследователь океана" size="40" class="form__text form__text_type_profession">
+          <input type="text" name="name" value="" placeholder="Имя" size="40" class="form__text form__text_type_name">
+          <input type="text" name="job" value="" placeholder="Профессиональная деятельность" size="40" class="form__text form__text_type_profession">
           <button type="submit" class="form__submit-button">Сохранить</button>
         </form>
       </div>
@@ -57,9 +57,9 @@
         <h3 class="popup__title">Новое место</h3>
         <form name="place-form" class="form form_type_place">
           <input type="text" name="place" value="" 
-          placeholder="Название" size="40" class="form__text form__text_type_place">
+          placeholder="Название" size="40" class="form__text form__text_type_place" required> 
           <input type="text" name="photo-link" value="" 
-          placeholder="Ссылка на картинку" size="40" class="form__text form__text_type_photo-link">
+          placeholder="Ссылка на картинку" size="40" class="form__text form__text_type_photo-link" required>
           <button type="submit" class="form__submit-button">Создать</button>
         </form>
       </div>
