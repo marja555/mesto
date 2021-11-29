@@ -1,4 +1,3 @@
-const popup = document.querySelector('.popup');
 const pageContainer = document.querySelector('.page__container');
 const profile = pageContainer.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
@@ -74,7 +73,7 @@ function formProfileSubmitHandler (evt) {
 
 function formPlaceSubmitHandler (evt) {
   evt.preventDefault();
-  inputs = {
+  const inputs = {
     name: placeInput.value,
     link: photoInput.value,
     alt: placeInput.value
