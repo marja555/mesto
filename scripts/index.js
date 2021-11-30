@@ -90,8 +90,6 @@ function formPlaceSubmitHandler (evt) {
   cardsOnline.prepend(newCard);
 
   closePopup(popupPlace);
-
-  formPlaceElement.reset(); 
 }
 
 function getCard(el) {
