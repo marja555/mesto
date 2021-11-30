@@ -51,11 +51,13 @@ const initialCards = [
 ];
 
 function openPopup(popup) {
-  if (popup === popupProfile) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileProfession.textContent;
-  } 
   popup.classList.add('popup_type_opened');
+}
+
+function openPopupProfile () {
+  openPopup(popupProfile);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileProfession.textContent;
 }
 
 function closePopup(popup) {
@@ -140,9 +142,7 @@ addButton.addEventListener('click', () => {
   openPopup(popupPlace);
 });
 
-editButton.addEventListener('click', () => {
-  openPopup(popupProfile);
-});
+editButton.addEventListener('click', openPopupProfile);
 
 closePopupProfileBtn.addEventListener('click', () => {
   closePopup(popupProfile);
