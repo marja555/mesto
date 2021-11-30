@@ -60,6 +60,12 @@ function openPopupProfile () {
   jobInput.value = profileProfession.textContent;
 }
 
+function openPopupPlace () {
+  openPopup(popupPlace);
+  placeInput.value = '';
+  photoInput.value = '';
+}
+
 function closePopup(popup) {
   popup.classList.remove('popup_type_opened');
 }
@@ -138,9 +144,7 @@ function handleImgClick (event) {
   openPopup(popupPic);
 }
 
-addButton.addEventListener('click', () => {
-  openPopup(popupPlace);
-});
+addButton.addEventListener('click', openPopupPlace);
 
 editButton.addEventListener('click', openPopupProfile);
 
