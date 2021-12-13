@@ -1,10 +1,10 @@
 const pageContainer = document.querySelector('.page__container');
 const profile = pageContainer.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
-const formProfileElement = document.querySelector('.form_type_profile');
-const formPlaceElement = document.querySelector('.form_type_place');
-const nameInput = formProfileElement.querySelector('.form__text_type_name');
-const jobInput = formProfileElement.querySelector('.form__text_type_profession');
+const formProfileElement = document.querySelector('.popup__form_type_profile');
+const formPlaceElement = document.querySelector('.popup__form_type_place');
+const nameInput = formProfileElement.querySelector('.popup__input_type_name');
+const jobInput = formProfileElement.querySelector('.popup__input_type_profession');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -14,8 +14,8 @@ const closePopupProfileBtn = popupProfile.querySelector('.popup__close');
 const closePopupPlaceBtn = popupPlace.querySelector('.popup__close');
 const closePopupPicBtn = popupPic.querySelector('.popup__close');
 const addButton = profile.querySelector('.profile__add-button');
-const placeInput = document.querySelector('.form__text_type_place');
-const photoInput = document.querySelector('.form__text_type_photo-link');
+const placeInput = document.querySelector('.popup__input_type_place');
+const photoInput = document.querySelector('.popup__input_type_photo-link');
 const cardsOnline = document.querySelector('.cards');
 const initialCards = [
   {
@@ -50,24 +50,18 @@ const initialCards = [
   }
 ];
 
-function openPopup(popup) {
-  popup.classList.add('popup_type_opened');
-}
-
-function openPopupProfile () {
-  openPopup(popupProfile);
+function openPopupProfile (type) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;
+  type.classList.add('popup_type_opened');
 }
 
-function openPopupPlace () {
-  openPopup(popupPlace);
-  placeInput.value = '';
-  photoInput.value = '';
+function openPopupPlace (type) {
+  type.classList.add('popup_type_opened');
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_type_opened');
+function closePopup(type) {
+  type.classList.remove('popup_type_opened');
 }
 
 function formProfileSubmitHandler (evt) {
@@ -90,6 +84,9 @@ function formPlaceSubmitHandler (evt) {
   cardsOnline.prepend(newCard);
 
   closePopup(popupPlace);
+
+  placeInput.value = '';
+  photoInput.value = '';  
 }
 
 function getCard(el) {
@@ -138,13 +135,16 @@ function handleImgClick (event) {
   const popupPicTitle = document.querySelector('.popup__pic-title');
   popupPicTitle.textContent = cardItem.textContent;
   popupBigImage.src = cardItem.querySelector('.card__image').src;
-  popupBigImage.alt = cardItem.textContent;
-  openPopup(popupPic);
+  openPopupPlace(popupPic);
 }
 
-addButton.addEventListener('click', openPopupPlace);
+addButton.addEventListener('click', () => {
+  openPopupPlace(popupPlace);
+});
 
-editButton.addEventListener('click', openPopupProfile);
+editButton.addEventListener('click', () => {
+  openPopupProfile(popupProfile);
+});
 
 closePopupProfileBtn.addEventListener('click', () => {
   closePopup(popupProfile);
