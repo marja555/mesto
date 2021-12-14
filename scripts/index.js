@@ -17,6 +17,9 @@ const addButton = profile.querySelector('.profile__add-button');
 const placeInput = document.querySelector('.popup__input_type_place');
 const photoInput = document.querySelector('.popup__input_type_photo-link');
 const cardsOnline = document.querySelector('.cards');
+const popupProfileOverlay = popupProfile.querySelector('.popup__overlay');
+const popupPlaceOverlay = popupPlace.querySelector('.popup__overlay');
+const popupPicOverlay = popupPic.querySelector('.popup__overlay');
 const initialCards = [
   {
     name: 'Архыз',
@@ -50,18 +53,42 @@ const initialCards = [
   }
 ];
 
-function openPopupProfile (type) {
+function openPopup(popup) {
+  popup.classList.add('popup_type_opened');
+}
+
+function keySetEventListener(popup) {
+  document.addEventListener ( 'keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      closePopup (popup);
+    }
+  });
+}
+
+function keyRemoveEventListener(popup) {
+  document.removeEventListener ( 'keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      closePopup (popup);
+    }
+  });
+}
+
+function openPopupProfile () {
+  openPopup(popupProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;
-  type.classList.add('popup_type_opened');
+  keySetEventListener(popupProfile);
 }
 
-function openPopupPlace (type) {
-  type.classList.add('popup_type_opened');
+function openPopupPlace () {
+  openPopup(popupPlace);
+  placeInput.value = '';
+  photoInput.value = '';
+  keySetEventListener(popupPlace);
 }
 
-function closePopup(type) {
-  type.classList.remove('popup_type_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_type_opened');
 }
 
 function formProfileSubmitHandler (evt) {
@@ -69,6 +96,7 @@ function formProfileSubmitHandler (evt) {
   profileName.textContent = nameInput.value;
   profileProfession.textContent = jobInput.value;
   closePopup(popupProfile);
+  keyRemoveEventListener(popupProfile);
 }
 
 function formPlaceSubmitHandler (evt) {
@@ -85,8 +113,7 @@ function formPlaceSubmitHandler (evt) {
 
   closePopup(popupPlace);
 
-  placeInput.value = '';
-  photoInput.value = '';  
+  keyRemoveEventListener(popupPlace);
 }
 
 function getCard(el) {
@@ -96,13 +123,10 @@ function getCard(el) {
   cardElement.querySelector('.card__title').textContent = el.name;
   cardPicture.src = el.link;
   cardPicture.alt = el.alt;
-
   const delButton = cardElement.querySelector('.card__del-button');
   delButton.addEventListener('click', handleDelete);
-
   const likeButton = cardElement.querySelector('.card__like');
   likeButton.addEventListener('click', handleLike);
-
   cardPicture.addEventListener('click', handleImgClick);
   
   return cardElement;
@@ -135,16 +159,15 @@ function handleImgClick (event) {
   const popupPicTitle = document.querySelector('.popup__pic-title');
   popupPicTitle.textContent = cardItem.textContent;
   popupBigImage.src = cardItem.querySelector('.card__image').src;
-  openPopupPlace(popupPic);
+  popupBigImage.alt = cardItem.textContent;
+  openPopup(popupPic);
+  keySetEventListener(popupPic);
 }
 
-addButton.addEventListener('click', () => {
-  openPopupPlace(popupPlace);
-});
 
-editButton.addEventListener('click', () => {
-  openPopupProfile(popupProfile);
-});
+addButton.addEventListener('click', openPopupPlace);
+
+editButton.addEventListener('click', openPopupProfile);
 
 closePopupProfileBtn.addEventListener('click', () => {
   closePopup(popupProfile);
@@ -158,5 +181,18 @@ closePopupPicBtn.addEventListener('click', () => {
   closePopup(popupPic);
 });
 
+popupProfileOverlay.addEventListener('click', () => {
+  closePopup(popupProfile);
+});
+
+popupPlaceOverlay.addEventListener('click', () => {
+    closePopup(popupPlace);
+});
+
+popupPicOverlay.addEventListener('click', () => {
+  closePopup(popupPic);
+});
+
 formProfileElement.addEventListener('submit', formProfileSubmitHandler);
+
 formPlaceElement.addEventListener('submit', formPlaceSubmitHandler);

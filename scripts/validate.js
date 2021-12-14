@@ -1,5 +1,18 @@
+function addInactiveButton ( inputs, button, inactiveButtonClass) {
+  if (hasInvalidInput(inputs)) {
+    button.classList.add(inactiveButtonClass);
+    button.disabled = true;
+  } else {
+    button.classList.remove(inactiveButtonClass);
+    button.disabled = false;
+  }
+}
 
-
+function hasInvalidInput (inputs) {
+  return inputs.some( (inputItem) => {
+    return !inputItem.validity.valid;
+  })
+}
 
 function showInputError (formItem, inputItem, inputErrorClass, 
   errorMessageText, errorMessageClass) 
@@ -15,23 +28,27 @@ function hideInputError (formItem, inputItem, inputErrorClass, errorMessageClass
   errorMessage.textContent = '';
   errorMessage.classList.remove(errorMessageClass);
   inputItem.classList.remove(inputErrorClass);
+  console.log(errorMessage)
 }
 
 function checkInputIsValid (formItem, inputItem, { errorClass, inputErrorClass }) {
   if (!inputItem.validity.valid) {
     showInputError(formItem, inputItem, inputErrorClass, 
-                 inputItem.validationMessage, errorClass);
+                 inputItem.validationMessage, errorClass);            
   } else {
     hideInputError (formItem, inputItem, errorClass, inputErrorClass);
-    
   }
 }
 
-const setEventListener = (formItem, { inputSelector, ...rest }) => {
+const setEventListener = (formItem, { inputSelector, 
+                inactiveButtonClass, submitButtonSelector, ...rest }) => {
   const inputs = Array.from(formItem.querySelectorAll(inputSelector));
+  const submitButton = formItem.querySelector(submitButtonSelector);
+  addInactiveButton (inputs, submitButton, inactiveButtonClass);
   inputs.forEach(function (inputItem) {
     inputItem.addEventListener('input', () => {
       checkInputIsValid (formItem, inputItem, rest);
+      addInactiveButton (inputs, submitButton, inactiveButtonClass);
     });
   });
 }
@@ -54,4 +71,4 @@ enableValidation({
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_visible',
-}); 
+});
