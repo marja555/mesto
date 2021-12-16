@@ -1,4 +1,10 @@
-function addInactiveButton ( inputs, button, inactiveButtonClass) {
+function hasInvalidInput(inputs) {
+  return inputs.some((inputItem) => {
+    return !inputItem.validity.valid;
+  })
+}
+
+function addInactiveButton(inputs, button, inactiveButtonClass) {
   if (hasInvalidInput(inputs)) {
     button.classList.add(inactiveButtonClass);
     button.disabled = true;
@@ -8,13 +14,7 @@ function addInactiveButton ( inputs, button, inactiveButtonClass) {
   }
 }
 
-function hasInvalidInput (inputs) {
-  return inputs.some( (inputItem) => {
-    return !inputItem.validity.valid;
-  })
-}
-
-function showInputError (formItem, inputItem, inputErrorClass, 
+function showInputError(formItem, inputItem, inputErrorClass, 
   errorMessageText, errorMessageClass) 
   {
   inputItem.classList.add(inputErrorClass);
@@ -23,27 +23,31 @@ function showInputError (formItem, inputItem, inputErrorClass,
   errorMessage.classList.add(errorMessageClass);
 }
 
-function hideInputError (formItem, inputItem, inputErrorClass, errorMessageClass) {
+function hideInputError(formItem, inputItem, inputErrorClass, errorMessageClass) {
   const errorMessage = formItem.querySelector(`#${inputItem.id}-error`);
   errorMessage.textContent = '';
   errorMessage.classList.remove(errorMessageClass);
   inputItem.classList.remove(inputErrorClass);
 }
 
-function checkInputIsValid (formItem, inputItem, { errorClass, inputErrorClass }) {
+function checkInputIsValid(formItem, inputItem, { errorClass, inputErrorClass }) {
   if (!inputItem.validity.valid) {
     showInputError(formItem, inputItem, inputErrorClass, 
                  inputItem.validationMessage, errorClass);            
   } else {
-    hideInputError (formItem, inputItem, inputErrorClass, errorClass);
+    hideInputError(formItem, inputItem, inputErrorClass, errorClass);
   }
 }
 
 const setEventListener = (formItem, { inputSelector, 
                 inactiveButtonClass, submitButtonSelector, ...rest }) => {
+
   const inputs = Array.from(formItem.querySelectorAll(inputSelector));
+
   const submitButton = formItem.querySelector(submitButtonSelector);
+
   addInactiveButton (inputs, submitButton, inactiveButtonClass);
+
   inputs.forEach(function (inputItem) {
     inputItem.addEventListener('input', () => {
       checkInputIsValid (formItem, inputItem, rest);
@@ -60,7 +64,6 @@ const enableValidation = ({ formSelector, ...rest }) => {
     });
     setEventListener(formItem, rest);
   });
-
 };
 
 enableValidation({

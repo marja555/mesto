@@ -22,9 +22,7 @@ const cardsOnline = document.querySelector('.cards');
 const popupProfileOverlay = popupProfile.querySelector('.popup__overlay');
 const popupPlaceOverlay = popupPlace.querySelector('.popup__overlay');
 const popupPicOverlay = popupPic.querySelector('.popup__overlay');
-const forms = document.querySelectorAll('.popup__form');
-const inputs = Array.from(document.querySelectorAll('.popup__input'));
-//const errors = Array.from(document.querySelectorAll(`#${inputItem.id}-error`));
+
 
 function openPopup(popup) {
   popup.classList.add('popup_type_opened');
