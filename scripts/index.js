@@ -33,6 +33,7 @@ function openPopup(popup) {
 }
 
 function clearInput () {
+  const inputs = document.querySelectorAll('.popup__input');
   inputs.forEach ( (inputItem) => {
     inputItem.classList.remove('popup__input_type_error');
   });
