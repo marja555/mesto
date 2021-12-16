@@ -21,7 +21,6 @@ function showInputError (formItem, inputItem, inputErrorClass,
   const errorMessage = formItem.querySelector(`#${inputItem.id}-error`);
   errorMessage.textContent = errorMessageText;
   errorMessage.classList.add(errorMessageClass);
-  console.log(inputItem)
 }
 
 function hideInputError (formItem, inputItem, inputErrorClass, errorMessageClass) {
@@ -29,7 +28,6 @@ function hideInputError (formItem, inputItem, inputErrorClass, errorMessageClass
   errorMessage.textContent = '';
   errorMessage.classList.remove(errorMessageClass);
   inputItem.classList.remove(inputErrorClass);
-  console.log(inputItem)
 }
 
 function checkInputIsValid (formItem, inputItem, { errorClass, inputErrorClass }) {

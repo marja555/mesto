@@ -7,6 +7,6 @@
   background-color: rgba(0, 0, 0, .5);
   visibility: hidden;
   opacity: 0;
-  transition: 1s;
+  transition: .5s;
   display: flex;
 }
