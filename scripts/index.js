@@ -18,11 +18,12 @@ const closePopupPicBtn = popupPic.querySelector('.popup__close');
 const addButton = profile.querySelector('.profile__add-button');
 const placeInput = document.querySelector('.popup__input_type_place');
 const photoInput = document.querySelector('.popup__input_type_photo-link');
-const cardsOnline = document.querySelector('.cards');
+const cardsContainer = document.querySelector('.cards');
 const popupProfileOverlay = popupProfile.querySelector('.popup__overlay');
 const popupPlaceOverlay = popupPlace.querySelector('.popup__overlay');
 const popupPicOverlay = popupPic.querySelector('.popup__overlay');
-
+const inputs = document.querySelectorAll('.popup__input');
+const errors = Array.from(document.querySelectorAll('.popup__input-error'));
 
 function openPopup(popup) {
   popup.classList.add('popup_type_opened');
@@ -33,11 +34,11 @@ function openPopup(popup) {
 }
 
 function clearInput () {
-  const inputs = document.querySelectorAll('.popup__input');
+  
   inputs.forEach ( (inputItem) => {
     inputItem.classList.remove('popup__input_type_error');
   });
-  const errors = Array.from(document.querySelectorAll('.popup__input-error'));
+  
   errors.forEach( (error) => {
     error.classList.remove('popup__input-error_visible');
   })
@@ -82,7 +83,7 @@ function formPlaceSubmitHandler () {
   
   const newCard = getCard(inputs);
   
-  cardsOnline.prepend(newCard);
+  cardsContainer.prepend(newCard);
 
   closePopup(popupPlace);
 }
@@ -108,7 +109,7 @@ function render() {
   const htmlCard = initialCards.map((el) => {
     return getCard(el);
   });
-  cardsOnline.append(...htmlCard);
+  cardsContainer.append(...htmlCard);
 }
 
 render();
