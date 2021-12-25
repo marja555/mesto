@@ -1,3 +1,6 @@
+import { initialCards } from '../utils/cards.js';
+import Card from './Card.js';
+
 const pageContainer = document.querySelector('.page__container');
 const profile = pageContainer.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
@@ -78,17 +81,16 @@ function formPlaceSubmitHandler () {
   const inputs = {
     name: placeInput.value,
     link: photoInput.value,
-    alt: placeInput.value
   };
   
-  const newCard = getCard(inputs);
-  
-  cardsContainer.prepend(newCard);
+  const newCard = new Card(inputs, '#cardTemplate', openPopup);
+  const newCardElement = newCard.generate();
+  cardsContainer.prepend(newCardElement);
 
   closePopup(popupPlace);
 }
 
-function getCard(el) {
+/*function getCard(el) {
   const cardTemplate = document.querySelector('#cardTemplate').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardPicture = cardElement.querySelector('.card__image');
@@ -103,16 +105,30 @@ function getCard(el) {
     handleImgClick (el.name, el.link)});
   
   return cardElement;
-}
+}*/
 
-function render() {
+initialCards.forEach((item) => {
+  const card = new Card(item, '#cardTemplate', openPopup);
+  const cardElement = card.generate();
+  cardsContainer.append(cardElement);
+});
+
+/*function handleImgClick (name, link) {
+  popupPicTitle.textContent = name;
+  popupBigImage.src = link;
+  popupBigImage.alt = name;
+  openPopup(popupPic);
+}*/
+
+
+/*function render() {
   const htmlCard = initialCards.map((el) => {
     return getCard(el);
   });
   cardsContainer.append(...htmlCard);
 }
 
-render();
+render(); 
 
 function handleDelete (event) {
   const eventTarget = event.target;
@@ -123,14 +139,9 @@ function handleDelete (event) {
 function handleLike (event) {
   const eventTarget = event.target;
   eventTarget.classList.toggle('card__like_active');
-}
+}*/
 
-function handleImgClick (name, link) {
-  popupPicTitle.textContent = name;
-  popupBigImage.src = link;
-  popupBigImage.alt = name;
-  openPopup(popupPic);
-}
+
 
 
 addButton.addEventListener('click', openPopupPlace);
