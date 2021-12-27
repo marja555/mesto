@@ -1,5 +1,7 @@
 import { initialCards } from '../utils/cards.js';
 import Card from './Card.js';
+import { formSelectors } from '../utils/formClasses.js';
+import FormValidator from './FormValidator.js';
 
 const pageContainer = document.querySelector('.page__container');
 const profile = pageContainer.querySelector('.profile');
@@ -13,8 +15,6 @@ const profileProfession = document.querySelector('.profile__profession');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupPlace = document.querySelector('.popup_type_place');
 const popupPic = document.querySelector('.popup_type_pic');
-const popupBigImage = document.querySelector('.popup__pic');
-const popupPicTitle = document.querySelector('.popup__pic-title');
 const closePopupProfileBtn = popupProfile.querySelector('.popup__close');
 const closePopupPlaceBtn = popupPlace.querySelector('.popup__close');
 const closePopupPicBtn = popupPic.querySelector('.popup__close');
@@ -27,6 +27,8 @@ const popupPlaceOverlay = popupPlace.querySelector('.popup__overlay');
 const popupPicOverlay = popupPic.querySelector('.popup__overlay');
 const inputs = document.querySelectorAll('.popup__input');
 const errors = Array.from(document.querySelectorAll('.popup__input-error'));
+
+
 
 function openPopup(popup) {
   popup.classList.add('popup_type_opened');
@@ -90,57 +92,12 @@ function formPlaceSubmitHandler () {
   closePopup(popupPlace);
 }
 
-/*function getCard(el) {
-  const cardTemplate = document.querySelector('#cardTemplate').content;
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardPicture = cardElement.querySelector('.card__image');
-  cardElement.querySelector('.card__title').textContent = el.name;
-  cardPicture.src = el.link;
-  cardPicture.alt = el.alt;
-  const delButton = cardElement.querySelector('.card__del-button');
-  delButton.addEventListener('click', handleDelete);
-  const likeButton = cardElement.querySelector('.card__like');
-  likeButton.addEventListener('click', handleLike);
-  cardPicture.addEventListener('click', () => { 
-    handleImgClick (el.name, el.link)});
-  
-  return cardElement;
-}*/
 
 initialCards.forEach((item) => {
   const card = new Card(item, '#cardTemplate', openPopup);
   const cardElement = card.generate();
   cardsContainer.append(cardElement);
 });
-
-/*function handleImgClick (name, link) {
-  popupPicTitle.textContent = name;
-  popupBigImage.src = link;
-  popupBigImage.alt = name;
-  openPopup(popupPic);
-}*/
-
-
-/*function render() {
-  const htmlCard = initialCards.map((el) => {
-    return getCard(el);
-  });
-  cardsContainer.append(...htmlCard);
-}
-
-render(); 
-
-function handleDelete (event) {
-  const eventTarget = event.target;
-  const cardItem = eventTarget.closest('.card');
-  cardItem.remove();
-}
-
-function handleLike (event) {
-  const eventTarget = event.target;
-  eventTarget.classList.toggle('card__like_active');
-}*/
-
 
 
 
@@ -175,3 +132,7 @@ popupPicOverlay.addEventListener('click', () => {
 formProfileElement.addEventListener('submit', formProfileSubmitHandler);
 
 formPlaceElement.addEventListener('submit', formPlaceSubmitHandler);
+
+const addFormValidation = 
+      new FormValidator(formSelectors, formPlaceElement);
+addFormValidation.enableValidation();

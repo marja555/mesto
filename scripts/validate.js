@@ -1,4 +1,4 @@
-function hasInvalidInput(inputs) {
+/*function hasInvalidInput(inputs) {
   return inputs.some((inputItem) => {
     return !inputItem.validity.valid;
   })
@@ -73,4 +73,4 @@ enableValidation({
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_visible',
-});
+});*/
