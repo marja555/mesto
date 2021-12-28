@@ -136,3 +136,7 @@ formPlaceElement.addEventListener('submit', formPlaceSubmitHandler);
 const addFormValidation = 
       new FormValidator(formSelectors, formPlaceElement);
 addFormValidation.enableValidation();
+
+const profileFormValidation = 
+      new FormValidator(formSelectors, formProfileElement);
+profileFormValidation.enableValidation();
