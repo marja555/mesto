@@ -1,14 +1,18 @@
+const popupBigImage = document.querySelector('.popup__pic');
+const popupPicTitle = document.querySelector('.popup__pic-title');
+const popupPic = document.querySelector('.popup_type_pic');
+
 export default class Card {
-  constructor (data, selector, onClick) {
-    this._image = data.link;
-    this._title = data.name;
-    this._selector = selector;
-    this._onClick = onClick;
+  constructor (validationConfig, cardSelector, openPopupHandler) {
+    this._image = validationConfig.link;
+    this._title = validationConfig.name;
+    this._cardSelector = cardSelector;
+    this._openPopupHandler = openPopupHandler;
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector(this._selector)
+      .querySelector(this._cardSelector)
       .content
       .querySelector('.card')
       .cloneNode(true)
@@ -35,14 +39,11 @@ export default class Card {
     likeButton.classList.toggle('card__like_active');
   }
 
-  _handleImgClick = () => {
-    const popupBigImage = document.querySelector('.popup__pic');
-    const popupPicTitle = document.querySelector('.popup__pic-title');
-    const popupPic = document.querySelector('.popup_type_pic');
+  _handleImgClick = () => {  
     popupBigImage.src = this._image;
     popupBigImage.alt = this._title;
     popupPicTitle.textContent = this._title;
-    this._onClick(popupPic);
+    this._openPopupHandler(popupPic);
   }
 
   _setEventListeners() {

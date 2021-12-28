@@ -28,14 +28,11 @@ const popupPicOverlay = popupPic.querySelector('.popup__overlay');
 const inputs = document.querySelectorAll('.popup__input');
 const errors = Array.from(document.querySelectorAll('.popup__input-error'));
 
-
-
 function openPopup(popup) {
   popup.classList.add('popup_type_opened');
   document.addEventListener('keydown', (evt) => {
     closeByEscape(evt, popup);
   });
-  clearInput();
 }
 
 function clearInput () {
@@ -64,6 +61,7 @@ function openPopupProfile () {
 function openPopupPlace () {
   openPopup(popupPlace);
   formPlaceElement.reset();
+  clearInput();
 }
 
 function closePopup(popup) {
@@ -92,14 +90,11 @@ function formPlaceSubmitHandler () {
   closePopup(popupPlace);
 }
 
-
 initialCards.forEach((item) => {
   const card = new Card(item, '#cardTemplate', openPopup);
   const cardElement = card.generate();
   cardsContainer.append(cardElement);
 });
-
-
 
 addButton.addEventListener('click', openPopupPlace);
 
