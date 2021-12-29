@@ -30,20 +30,11 @@ const errors = Array.from(document.querySelectorAll('.popup__input-error'));
 
 function openPopup(popup) {
   popup.classList.add('popup_type_opened');
-  document.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown', function (evt) {
     closeByEscape(evt, popup);
   });
-}
-
-function clearInput () {
-  
-  inputs.forEach ( (inputItem) => {
-    inputItem.classList.remove('popup__input_type_error');
-  });
-  
-  errors.forEach( (error) => {
-    error.classList.remove('popup__input-error_visible');
-  })
+  addFormValidation.setInactiveButton();
+  profileFormValidation.setInactiveButton();
 }
 
 function closeByEscape(evt, popup) {
@@ -54,19 +45,20 @@ function closeByEscape(evt, popup) {
 
 function openPopupProfile () {
   openPopup(popupProfile);
+  profileFormValidation.removeInputError();
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;
 }
 
 function openPopupPlace () {
   openPopup(popupPlace);
+  addFormValidation.removeInputError();
   formPlaceElement.reset();
-  clearInput();
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_type_opened');
-  document.removeEventListener('keydown', (evt) => {
+  document.removeEventListener('keydown', function (evt) {
     closeByEscape(evt, popup);
   })
 }
@@ -77,23 +69,27 @@ function formProfileSubmitHandler () {
   closePopup(popupProfile);
 }
 
+function createCard(obj) {
+  const card = new Card(obj, '#cardTemplate', openPopup);
+  const cardElement = card.generate();
+  return cardElement;
+}
+
 function formPlaceSubmitHandler () {
   const inputs = {
     name: placeInput.value,
     link: photoInput.value,
   };
   
-  const newCard = new Card(inputs, '#cardTemplate', openPopup);
-  const newCardElement = newCard.generate();
-  cardsContainer.prepend(newCardElement);
+  const newCard = createCard(inputs);
+  cardsContainer.prepend(newCard);
 
   closePopup(popupPlace);
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '#cardTemplate', openPopup);
-  const cardElement = card.generate();
-  cardsContainer.append(cardElement);
+  const card = createCard(item);
+  cardsContainer.append(card);
 });
 
 addButton.addEventListener('click', openPopupPlace);

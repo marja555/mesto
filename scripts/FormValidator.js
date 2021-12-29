@@ -2,28 +2,34 @@ export default class FormValidator {
   constructor (validationConfig, form) {
     this._form = form;
     this._inputSelector = validationConfig.inputSelector;
-    this._submitButton = validationConfig.submitButtonSelector;
+    this._submitButton = this._form.querySelector
+                        (validationConfig.submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll
+                        (this._inputSelector));
     this._inactiveButtonClass = validationConfig.inactiveButtonClass;
     this._inputErrorClass = validationConfig.inputErrorClass;
     this._errorClass = validationConfig.errorClass;
   }
 
   _hasInvalidInput() {
-    return this._inputs.some((inputItem) => {
+    return this._inputList.some((inputItem) => {
       return !inputItem.validity.valid
     })
   }
-
+  
   _addInactiveButton() {
-    if (this._hasInvalidInput(this._inputs)) {
-      this._submitButton = 
-            this._form.querySelector('.popup__submit-button');
+    if (this._hasInvalidInput(this._inputList)) {
       this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.disabled = true;
     } else {
       this._submitButton.classList.remove(this._inactiveButtonClass);
       this._submitButton.disabled = false;
     }
+  }
+
+  setInactiveButton() {
+    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.disabled = true;
   }
 
   _showInputError(inputItem, errorMessageText) {
@@ -40,6 +46,12 @@ export default class FormValidator {
     errorMessage.classList.remove(this._errorClass);
   }
 
+  removeInputError() { 
+    this._inputList.forEach((inputItem) => {
+      this._hideInputError(inputItem);
+    });
+  }
+
   _checkInputIsValid(inputItem) {
     if (!inputItem.validity.valid) {
       this._showInputError(inputItem, inputItem.validationMessage);
@@ -49,16 +61,13 @@ export default class FormValidator {
   }
   
   _setEventListeners() {
-    this._inputs = Array.from
-       (this._form.querySelectorAll(this._inputSelector));
+    this._addInactiveButton(this._inputList);
 
-    this._addInactiveButton(this._inputs);
-
-    this._inputs.forEach( (inputItem) => {
+    this._inputList.forEach( (inputItem) => {
       inputItem.addEventListener('input', () => {
         this._checkInputIsValid(inputItem);
         
-        this._addInactiveButton(this._inputs);
+        this._addInactiveButton(this._inputList);
       });
     });
   }
