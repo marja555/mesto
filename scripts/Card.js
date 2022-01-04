@@ -3,9 +3,9 @@ const popupPicTitle = document.querySelector('.popup__pic-title');
 const popupPic = document.querySelector('.popup_type_pic');
 
 export default class Card {
-  constructor (validationConfig, cardSelector, openPopupHandler) {
-    this._image = validationConfig.link;
-    this._title = validationConfig.name;
+  constructor (cardData, cardSelector, openPopupHandler) {
+    this._image = cardData.link;
+    this._title = cardData.name;
     this._cardSelector = cardSelector;
     this._openPopupHandler = openPopupHandler;
   }
