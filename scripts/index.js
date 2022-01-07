@@ -26,16 +26,17 @@ const popupProfileOverlay = popupProfile.querySelector('.popup__overlay');
 const popupPlaceOverlay = popupPlace.querySelector('.popup__overlay');
 const popupPicOverlay = popupPic.querySelector('.popup__overlay');
 
-function openPopup(popup) {
-  popup.classList.add('popup_type_opened');
-  document.addEventListener('keydown', closeByEscape);
-}
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const onPopup = document.querySelector('.popup_type_opened');
       closePopup (onPopup);
     }
+}
+
+function openPopup(popup) {
+  popup.classList.add('popup_type_opened');
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function openPopupProfile () {
