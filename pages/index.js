@@ -1,7 +1,8 @@
-import { initialCards } from '../utils/cards.js';
-import Card from './Card.js';
-import { formSelectors } from '../utils/formClasses.js';
-import FormValidator from './FormValidator.js';
+import { initialCards, formSelectors } from '../utils/constants.js';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const pageContainer = document.querySelector('.page__container');
 const profile = pageContainer.querySelector('.profile');
@@ -34,10 +35,10 @@ function closeByEscape(evt) {
     }
 }
 
-function openPopup(popup) {
-  popup.classList.add('popup_type_opened');
-  document.addEventListener('keydown', closeByEscape);
-}
+//function openPopup(popup) {
+ // popup.classList.add('popup_type_opened');
+ // document.addEventListener('keydown', closeByEscape);
+//}
 
 function openPopupProfile () {
   openPopup(popupProfile);
@@ -68,10 +69,28 @@ function formProfileSubmitHandler () {
 }
 
 function createCard(obj) {
-  const card = new Card(obj, '#cardTemplate', openPopup);
+  const card = new Card({ cardData: obj,
+  handleCardClick: () => {
+    const bigImage = new PopupWithImage('.popup_type_pic');
+    bigImage.open(obj.name, obj.link);
+  },
+},
+  '#cardTemplate')
   const cardElement = card.generate();
   return cardElement;
 }
+
+const cardsList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const card = createCard(item);
+    cardsList.addItem(card);
+  },
+},
+cardsContainer
+);
+
+cardsList.renderItems();
 
 function formPlaceSubmitHandler () {
   const inputs = {
@@ -85,16 +104,13 @@ function formPlaceSubmitHandler () {
   closePopup(popupPlace);
 }
 
-initialCards.forEach((item) => {
-  const card = createCard(item);
-  cardsContainer.append(card);
-});
+
 
 addButton.addEventListener('click', openPopupPlace);
 
 editButton.addEventListener('click', openPopupProfile);
 
-closePopupProfileBtn.addEventListener('click', () => {
+/*closePopupProfileBtn.addEventListener('click', () => {
   closePopup(popupProfile);
 });
 
@@ -116,7 +132,7 @@ popupPlaceOverlay.addEventListener('click', () => {
 
 popupPicOverlay.addEventListener('click', () => {
   closePopup(popupPic);
-});
+});*/
 
 formProfileElement.addEventListener('submit', formProfileSubmitHandler);
 

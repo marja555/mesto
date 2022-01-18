@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Это одностраничный сайт с фотографиями, которые можно добавлять/удалять/просматривать в полном размере, и профилем, который можно редактировать.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marja555/mesto.git"
+  },
+  "author": "MarinaPoselentseva\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D \u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~\u001b[3~Poselentseva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marja555/mesto/issues"
+  },
+  "homepage": "https://github.com/marja555/mesto#readme"
+}

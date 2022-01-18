@@ -1,13 +1,11 @@
-const popupBigImage = document.querySelector('.popup__pic');
-const popupPicTitle = document.querySelector('.popup__pic-title');
-const popupPic = document.querySelector('.popup_type_pic');
+
 
 export default class Card {
-  constructor (cardData, cardSelector, openPopupHandler) {
+  constructor ({ cardData, handleCardClick }, cardSelector) {
     this._image = cardData.link;
     this._title = cardData.name;
     this._cardSelector = cardSelector;
-    this._openPopupHandler = openPopupHandler;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -39,12 +37,12 @@ export default class Card {
     likeButton.classList.toggle('card__like_active');
   }
 
-  _handleImgClick = () => {  
+  /*_handleImgClick = () => {  
     popupBigImage.src = this._image;
     popupBigImage.alt = this._title;
     popupPicTitle.textContent = this._title;
     this._openPopupHandler(popupPic);
-  }
+  }*/
 
   _setEventListeners() {
     const delButton = this._element.querySelector('.card__del-button');
@@ -52,7 +50,7 @@ export default class Card {
     const likeButton = this._element.querySelector('.card__like');
     likeButton.addEventListener('click', this._handleLike);
     const cardImage = this._element.querySelector('.card__image');
-    cardImage.addEventListener('click', this._handleImgClick);
+    cardImage.addEventListener('click', this._handleCardClick);
   }
 }
 
