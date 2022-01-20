@@ -20,14 +20,14 @@ export default class Popup {
 
   _handleEscClose(evt) {
     if (evt.key === 'Escape') {
-      this.close();
+      this.close(this._popup);
       console.log(evt.key);
     }
   }
 
   setEventListeners() {
-    const closePopupBtn = this._popup.querySelector('.popup__close');
-    closePopupBtn.addEventListener('click', () => {
+    this._closePopupBtn = this._popup.querySelector('.popup__close');
+    this._closePopupBtn.addEventListener('click', () => {
       this.close();
     });
 

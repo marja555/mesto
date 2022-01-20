@@ -3,6 +3,8 @@ import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const pageContainer = document.querySelector('.page__container');
 const profile = pageContainer.querySelector('.profile');
@@ -13,18 +15,18 @@ const nameInput = formProfileElement.querySelector('.popup__input_type_name');
 const jobInput = formProfileElement.querySelector('.popup__input_type_profession');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
-const popupProfile = document.querySelector('.popup_type_profile');
-const popupPlace = document.querySelector('.popup_type_place');
+//const popupProfile = document.querySelector('.popup_type_profile');
+//const popupPlace = document.querySelector('.popup_type_place');
 const popupPic = document.querySelector('.popup_type_pic');
-const closePopupProfileBtn = popupProfile.querySelector('.popup__close');
-const closePopupPlaceBtn = popupPlace.querySelector('.popup__close');
+//const closePopupProfileBtn = popupProfile.querySelector('.popup__close');
+//const closePopupPlaceBtn = popupPlace.querySelector('.popup__close');
 const closePopupPicBtn = popupPic.querySelector('.popup__close');
 const addButton = profile.querySelector('.profile__add-button');
 const placeInput = document.querySelector('.popup__input_type_place');
 const photoInput = document.querySelector('.popup__input_type_photo-link');
 const cardsContainer = document.querySelector('.cards');
-const popupProfileOverlay = popupProfile.querySelector('.popup__overlay');
-const popupPlaceOverlay = popupPlace.querySelector('.popup__overlay');
+//const popupProfileOverlay = popupProfile.querySelector('.popup__overlay');
+//const popupPlaceOverlay = popupPlace.querySelector('.popup__overlay');
 const popupPicOverlay = popupPic.querySelector('.popup__overlay');
 
 
@@ -41,26 +43,49 @@ function closeByEscape(evt) {
 //}
 
 function openPopupProfile () {
-  openPopup(popupProfile);
-  profileFormValidation.removeInputError();
+  //openPopup(popupProfile);
+  //profileFormValidation.removeInputError();
   
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileProfession.textContent;
+  //nameInput.value = profileName.textContent;
+  //jobInput.value = profileProfession.textContent;
 
+  //profileFormValidation.setInactiveButton();
+
+  const popupProfile = new PopupWithForm({ 
+    popupSelector: '.popup_type_profile',
+    handleFormSubmit: () => {
+      const aboutUser = new UserInfo({
+        userName: profileName.textContent,
+        userInfo: profileProfession.textContent
+      });
+      aboutUser.getUserInfo();
+    }
+  });
+  popupProfile.open();
+
+  profileFormValidation.removeInputError();
   profileFormValidation.setInactiveButton();
 }
 
 function openPopupPlace () {
-  openPopup(popupPlace);
+  const popupPlace = new PopupWithForm({
+    popupSelector: '.popup_type_place',
+    handleFormSubmit: (formData) =>
+    createCard(formData)
+  });
+  popupPlace.open()
+  
   addFormValidation.removeInputError();
-  formPlaceElement.reset();
+  //formPlaceElement.reset();
   addFormValidation.setInactiveButton();
 }
 
-function closePopup(popup) {
+
+
+/*function closePopup(popup) {
   popup.classList.remove('popup_type_opened');
   document.removeEventListener('keydown', closeByEscape);
-}
+}*/
 
 function formProfileSubmitHandler () {
   profileName.textContent = nameInput.value;
@@ -92,7 +117,9 @@ cardsContainer
 
 cardsList.renderItems();
 
-function formPlaceSubmitHandler () {
+
+
+/*function formPlaceSubmitHandler () {
   const inputs = {
     name: placeInput.value,
     link: photoInput.value,
@@ -101,8 +128,8 @@ function formPlaceSubmitHandler () {
   const newCard = createCard(inputs);
   cardsContainer.prepend(newCard);
 
-  closePopup(popupPlace);
-}
+  //closePopup(popupPlace);
+}*/
 
 
 
@@ -136,7 +163,7 @@ popupPicOverlay.addEventListener('click', () => {
 
 formProfileElement.addEventListener('submit', formProfileSubmitHandler);
 
-formPlaceElement.addEventListener('submit', formPlaceSubmitHandler);
+//formPlaceElement.addEventListener('submit', formPlaceSubmitHandler);
 
 const addFormValidation = 
       new FormValidator(formSelectors, formPlaceElement);
