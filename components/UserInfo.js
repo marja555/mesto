@@ -5,20 +5,20 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    const nameInput = document.querySelector('.popup__input_type_name');
-    const jobInput = document.querySelector('.popup__input_type_profession');
-
     this.userData = {}
-    //this._userData[this._userName] = nameInput.value;
-    //this._userData[this._userInfo] = jobInput.value;
 
-    this.userData[nameInput.value] = this._userName;
-    this.userData[jobInput.value] = this._userInfo;
-    console.log(nameInput)
+    this.userData[userName] = this._userName;
+    this.userData[userJob] = this._userInfo;
     return this.userData;
   }
 
-  setUserInfo() {
-    
+  setUserInfo(data) {
+    key0 = Object.keys(data)[0];
+    key1 = Object.keys(data)[1];
+    value0 = data[key0];
+    value1 = data[key1];
+
+    this._userName = value0;
+    this._userInfo = value1;
   }
 }
