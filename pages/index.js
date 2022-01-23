@@ -37,13 +37,13 @@ const popupPlaceClass = new PopupWithForm({
   }
 });
 const aboutUserClass = new UserInfo({
-  userName: profileName.textContent,
-  userInfo: profileProfession.textContent,
+  nameSelector: profileName,
+  infoSelector: profileProfession,
 });
-const popupProfile = new PopupWithForm({ 
+const popupProfileClass = new PopupWithForm({ 
   popupSelector: '.popup_type_profile',
-  handleFormSubmit: ({}) => {
-    
+  handleFormSubmit: ({name, job}) => {
+    aboutUserClass.setUserInfo({name, job});
   }
 });
 
@@ -61,12 +61,10 @@ const popupProfile = new PopupWithForm({
 //}
 
 function openPopupProfile () {
-
-  
-  popupProfile.open();
+  popupProfileClass.open();
   const aboutUser = aboutUserClass.getUserInfo();
-    nameInput.value = aboutUser.userName;
-    jobInput.value = aboutUser.userJob;
+    nameInput.value = aboutUser.nameOfUser;
+    jobInput.value = aboutUser.jobOfUser;
   
   profileFormValidation.removeInputError();
   profileFormValidation.setInactiveButton();
@@ -115,8 +113,6 @@ cardsContainer
 );
 
 cardsList.renderItems();
-
-
 
 function formPlaceSubmitHandler () {
   const inputs = {

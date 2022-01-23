@@ -1,24 +1,21 @@
 export default class UserInfo {
-  constructor({ userName, userInfo }) {
-    this._userName = userName;
-    this._userInfo = userInfo;
+  constructor({ nameSelector, infoSelector }) {
+    this._nameSelector = nameSelector;
+    this._infoSelector = infoSelector;
   }
 
   getUserInfo() {
     this.userData = {}
 
-    this.userData[userName] = this._userName;
-    this.userData[userJob] = this._userInfo;
+    this.userData.nameOfUser = this._nameSelector.textContent;
+    this.userData.jobOfUser = this._infoSelector.textContent;
+    console.log(this.userData)
     return this.userData;
   }
 
-  setUserInfo(data) {
-    key0 = Object.keys(data)[0];
-    key1 = Object.keys(data)[1];
-    value0 = data[key0];
-    value1 = data[key1];
+  setUserInfo({ name, job }) {
 
-    this._userName = value0;
-    this._userInfo = value1;
+    this._nameSelector.textContent = name;
+    this._infoSelector.textContent = job;
   }
 }
