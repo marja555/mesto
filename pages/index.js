@@ -43,8 +43,10 @@ const aboutUserClass = new UserInfo({
 const popupProfileClass = new PopupWithForm({ 
   popupSelector: '.popup_type_profile',
   handleFormSubmit: ({name, job}) => {
-    aboutUserClass.setUserInfo({name, job});
+    aboutUserClass.setUserInfo({name, job});;
+    //popupProfileClass.close();
   }
+  
 });
 
 
@@ -74,21 +76,13 @@ function openPopupPlace () {
   popupPlaceClass.open()
   
   addFormValidation.removeInputError();
-  //formPlaceElement.reset();
   addFormValidation.setInactiveButton();
 }
 
 
-
-/*function closePopup(popup) {
-  popup.classList.remove('popup_type_opened');
-  document.removeEventListener('keydown', closeByEscape);
-}*/
-
-/*function formProfileSubmitHandler () {
-  profileName.textContent = nameInput.value;
-  profileProfession.textContent = jobInput.value;
-  closePopup(popupProfile);
+/*function formProfileSubmitHandler ({name, job}) {
+  aboutUserClass.setUserInfo({name, job});
+  popupProfileClass.close();
 }*/
 
 function createCard(obj) {
@@ -125,8 +119,6 @@ function formPlaceSubmitHandler () {
 
   popupPlaceClass.close();
 }
-
-
 
 addButton.addEventListener('click', openPopupPlace);
 
