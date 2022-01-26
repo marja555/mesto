@@ -20,48 +20,54 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
-const bigImageClass = new PopupWithImage('.popup_type_pic');
-const popupPlaceClass = new PopupWithForm({
+const bigImage = new PopupWithImage('.popup_type_pic');
+bigImage.setEventListeners();
+
+const popupPlace = new PopupWithForm({
   popupSelector: '.popup_type_place',
   handleFormSubmit: (formData) => {
   createCard(formData);
+  popupPlace.close();
   }
 });
-const aboutUserClass = new UserInfo({
-  nameSelector: profileName,
-  infoSelector: profileProfession,
+popupPlace.setEventListeners();
+
+const userInfo = new UserInfo({
+  nameEl: profileName,
+  jobEl: profileProfession,
 });
-const popupProfileClass = new PopupWithForm({ 
+const popupProfile = new PopupWithForm({ 
   popupSelector: '.popup_type_profile',
   handleFormSubmit: ({name, job}) => {
-    aboutUserClass.setUserInfo({name, job});;
+    userInfo.setUserInfo({name, job});
+    popupProfile.close();
   }
 });
+popupProfile.setEventListeners();
 
 function openPopupProfile () {
-  popupProfileClass.open();
-  const aboutUser = aboutUserClass.getUserInfo();
-    nameInput.value = aboutUser.nameOfUser;
-    jobInput.value = aboutUser.jobOfUser;
+  popupProfile.open();
+  const aboutUser = userInfo.getUserInfo();
+    nameInput.value = aboutUser.name;
+    jobInput.value = aboutUser.job;
   
   profileFormValidation.removeInputError();
   profileFormValidation.setInactiveButton();
 }
 
 function openPopupPlace () {
-  popupPlaceClass.open()
+  popupPlace.open()
   
   addFormValidation.removeInputError();
   addFormValidation.setInactiveButton();
 }
 
-function createCard(obj) {
-  const card = new Card({ cardData: obj,
+function createCard(cardData) {
+  const card = new Card({ cardData: cardData,
   handleCardClick: () => {
-    bigImageClass.open(obj.name, obj.link);
-  },
-},
-  '#cardTemplate')
+    bigImage.open(cardData.name, cardData.link);
+  }},
+  '#cardTemplate');
   const cardElement = card.generate();
   return cardElement;
 }
@@ -87,7 +93,7 @@ function formPlaceSubmitHandler () {
   const newCard = createCard(inputs);
   cardsContainer.prepend(newCard);
 
-  popupPlaceClass.close();
+  popupPlace.close();
 }
 
 addButton.addEventListener('click', openPopupPlace);
