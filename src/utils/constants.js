@@ -34,6 +34,14 @@ export const formSelectors = {
   errorClass: 'popup__input-error_visible',
 }
 
-export const popupBigImage = document.querySelector('.popup__pic');
-export const popupPicTitle = document.querySelector('.popup__pic-title');
-export const popupPic = document.querySelector('.popup_type_pic');
+export const editButton = document.querySelector('.profile__edit-button');
+export const formProfileElement = document.querySelector('.popup__form_type_profile');
+export const formPlaceElement = document.querySelector('.popup__form_type_place');
+export const nameInput = formProfileElement.querySelector('.popup__input_type_name');
+export const jobInput = formProfileElement.querySelector('.popup__input_type_profession');
+export const profileName = document.querySelector('.profile__name');
+export const profileProfession = document.querySelector('.profile__profession');
+export const addButton = document.querySelector('.profile__add-button');
+export const placeInput = document.querySelector('.popup__input_type_place');
+export const photoInput = document.querySelector('.popup__input_type_photo-link');
+export const cardsContainer = document.querySelector('.cards');

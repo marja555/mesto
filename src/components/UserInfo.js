@@ -9,12 +9,11 @@ export default class UserInfo {
 
     this.userData.nameOfUser = this._nameSelector.textContent;
     this.userData.jobOfUser = this._infoSelector.textContent;
-    console.log(this.userData)
+    
     return this.userData;
   }
 
   setUserInfo({ name, job }) {
-
     this._nameSelector.textContent = name;
     this._infoSelector.textContent = job;
   }
