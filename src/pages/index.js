@@ -9,8 +9,6 @@ import {
   profileName,
   profileProfession,
   addButton,
-  placeInput,
-  photoInput,
   cardsContainer
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
@@ -23,10 +21,23 @@ import UserInfo from '../components/UserInfo.js';
 const bigImage = new PopupWithImage('.popup_type_pic');
 bigImage.setEventListeners();
 
+const cardsList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const card = createCard(item);
+    cardsList.addItem(card);
+  },
+},
+cardsContainer
+);
+
+cardsList.renderItems();
+
 const popupPlace = new PopupWithForm({
   popupSelector: '.popup_type_place',
-  handleFormSubmit: (formData) => {
-  createCard(formData);
+  handleFormSubmit: ({place, image}) => {
+  const newCard = createCard({name: place, link: image});
+  cardsList.prependItem(newCard);
   popupPlace.close();
   }
 });
@@ -72,35 +83,9 @@ function createCard(cardData) {
   return cardElement;
 }
 
-const cardsList = new Section ({
-  items: initialCards,
-  renderer: (item) => {
-    const card = createCard(item);
-    cardsList.addItem(card);
-  },
-},
-cardsContainer
-);
-
-cardsList.renderItems();
-
-function formPlaceSubmitHandler () {
-  const inputs = {
-    name: placeInput.value,
-    link: photoInput.value,
-  };
-  
-  const newCard = createCard(inputs);
-  cardsContainer.prepend(newCard);
-
-  popupPlace.close();
-}
-
 addButton.addEventListener('click', openPopupPlace);
 
 editButton.addEventListener('click', openPopupProfile);
-
-formPlaceElement.addEventListener('submit', formPlaceSubmitHandler);
 
 const addFormValidation = 
       new FormValidator(formSelectors, formPlaceElement);

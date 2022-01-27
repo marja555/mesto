@@ -37,13 +37,6 @@ export default class Card {
     likeButton.classList.toggle('card__like_active');
   }
 
-  /*_handleImgClick = () => {  
-    popupBigImage.src = this._image;
-    popupBigImage.alt = this._title;
-    popupPicTitle.textContent = this._title;
-    this._openPopupHandler(popupPic);
-  }*/
-
   _setEventListeners() {
     const delButton = this._element.querySelector('.card__del-button');
     delButton.addEventListener('click', this._handleDelete);

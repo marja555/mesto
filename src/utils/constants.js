@@ -42,6 +42,4 @@ export const jobInput = formProfileElement.querySelector('.popup__input_type_pro
 export const profileName = document.querySelector('.profile__name');
 export const profileProfession = document.querySelector('.profile__profession');
 export const addButton = document.querySelector('.profile__add-button');
-export const placeInput = document.querySelector('.popup__input_type_place');
-export const photoInput = document.querySelector('.popup__input_type_photo-link');
 export const cardsContainer = document.querySelector('.cards');
