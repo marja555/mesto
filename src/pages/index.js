@@ -1,5 +1,5 @@
 import './index.css';
-import { initialCards, formSelectors, profileAvatar } from '../utils/constants.js';
+import { formSelectors, profileAvatar } from '../utils/constants.js';
 import {
   editButton,
   formProfileElement,
@@ -18,25 +18,38 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import PopupWithFormSubmit from '../components/PopupWithFormSubmit';
 
 const api = new Api({
   adress: 'https://mesto.nomoreparties.co/v1/cohort-35',
   token: '046e1e7e-a85b-4246-8cd0-fe8501647960'
 });
 
+const popupSubmit = new PopupWithFormSubmit('.popup_type_submit');
+
+function handleRender(data) { //функция для отрисовки любых карточек
+  const cardsList = new Section({
+    items: data,
+    renderer: (item) => {
+      const card = createCard(item);
+      cardsList.addItem(card)
+    },
+  },
+  cardsContainer
+  );
+  return cardsList;
+}
+
 api.getCards()
   .then((cards) => {
-    console.log(cards)
-    const cardsList = new Section ({
+    const cardsCreated = new Section({
       items: cards,
-      renderer: (item) => {
-        const card = createCard(item);
-        cardsList.addItem(card);
-      },
-    },
-    cardsContainer
-    );
-    cardsList.renderItems();
+      renderer: (cardData) => {
+        return cardData.likes.length;
+      }
+    });
+    cardsCreated.renderItems();
+    handleRender(cards).renderItems();
   })
   .catch(err => console.log(err));
 
@@ -67,8 +80,8 @@ const popupPlace = new PopupWithForm({
     api.addCard({place, image})
     .then((data) => {
       const newCard = createCard({name: data.name, link: data.link});
-    cardsList.prependItem(newCard);
-    popupPlace.close();
+      handleRender(data).prependItem(newCard);
+      popupPlace.close();
     })
     .catch(err => console.log(`Ошибка при создании карточки ${err}`))
   }   
@@ -80,6 +93,12 @@ const userInfo = new UserInfo({
   jobEl: profileProfession,
   avatarEl: profileAvatar
 });
+
+api.getUser()
+  .then((data) => {
+    userInfo.getUserInfo(data);
+  })
+  .catch(err => console.log(err))
 
 const popupProfile = new PopupWithForm({ 
   popupSelector: '.popup_type_profile',
@@ -99,13 +118,6 @@ function openPopupProfile () {
   // const aboutUser = userInfo.getUserInfo();
   //   nameInput.value = aboutUser.name;
   //   jobInput.value = aboutUser.job;
-
-  api.getUser()
-  .then((data) => {
-    userInfo.getUserInfo(data);
-  })
-  .catch(err => console.log(err))
-  
   profileFormValidation.removeInputError();
   profileFormValidation.setInactiveButton();
 }
@@ -121,7 +133,15 @@ function createCard(cardData) {
   const card = new Card({ cardData: cardData,
   handleCardClick: () => {
     bigImage.open(cardData.name, cardData.link);
-  }},
+  },
+  handleDeleteBtnClick: () => {
+    popupSubmit.open();
+    
+    // popupSubmit.setSubmitAction( () => {
+    //   console.log('Hey');
+    // })
+  }
+},
   '#cardTemplate');
   const cardElement = card.generate();
   return cardElement;

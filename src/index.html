@@ -13,11 +13,11 @@
       <main>
         <section class="profile">
           <div class="profile__info">
-            <img src="<%=require('./images/kusto.jpg')%>" class="profile__image" alt="Жак Кусто">
+            <img src="" class="profile__image" alt="Жак Кусто">
             <div class="profile__info-container">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <h1 class="profile__name"></h1>
               <button type="button" class="profile__edit-button"></button>
-              <p class="profile__profession">Исследователь океана</p>
+              <p class="profile__profession"></p>
             </div>
           </div>  
           <button type="button" class="profile__add-button"></button>
@@ -30,7 +30,7 @@
               <div class="card__rectangle">
                 <h2 class="card__title"></h2>
                 <button type="button" class="card__like"></button>
-                <div class="card__like-counter">5</div>
+                <div class="card__likes-counter"></div>
               </div>
             </div>
           </template>
@@ -84,6 +84,13 @@
         <img src="#" alt="Изображение." class="popup__pic">
         <h2 class="popup__pic-title">картинка</h2>
         <button type="button" class="popup__close"></button>
+      </div>
+    </div>
+    <div class="popup popup_type_submit">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <h2 class="popup__question">Вы уверены?</h2>
+        <button type="submit" class="popup__yes">Да</button>
       </div>
     </div>
   </body>

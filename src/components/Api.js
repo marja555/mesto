@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 
 export default class Api {
   constructor({adress, token}) {
@@ -33,6 +32,7 @@ export default class Api {
         link: image
       })
     })
+    .then(this._handleResponse)
   }
 
   getUser() {
@@ -40,17 +40,11 @@ export default class Api {
       headers: {
         authorization: this._token
       }
-    }).then(response => {
-      console.log(response)
-      if (response.ok) {
-        return response.json();
-      }
-      return Promise.reject(`Ошибка: ${response.status}`);
-    })
+    }).then(this._handleResponse)
   }
 
   editUserInfo({name, job}) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-35/users/me'), {
+    return fetch(`${this._adress}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -60,6 +54,17 @@ export default class Api {
         name,
         about: job
       })
-    }
+    })
+    .then(this._handleResponse)
+  }
+
+  deleteCard() {
+    return fetch(`${this._adress}/cards/${_id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(this._handleResponse)
   }
 }
