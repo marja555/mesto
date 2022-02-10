@@ -26,6 +26,7 @@ const api = new Api({
 });
 
 const popupSubmit = new PopupWithFormSubmit('.popup_type_submit');
+popupSubmit.setEventListeners();
 
 function handleRender(data) { //функция для отрисовки любых карточек
   const cardsList = new Section({
@@ -46,6 +47,7 @@ api.getCards()
       items: cards,
       renderer: (cardData) => {
         return cardData.likes.length;
+        cardData.handleRemoveDeleteIcon();
       }
     });
     cardsCreated.renderItems();
@@ -136,11 +138,13 @@ function createCard(cardData) {
   },
   handleDeleteBtnClick: () => {
     popupSubmit.open();
-    
-    // popupSubmit.setSubmitAction( () => {
-    //   console.log('Hey');
-    // })
-  }
+    popupSubmit.setSubmitAction( () => {
+      api.deleteCard(cardData._id)
+        .then(()  => {
+          card.deleteCard();
+        })
+     })
+  },
 },
   '#cardTemplate');
   const cardElement = card.generate();

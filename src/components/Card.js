@@ -7,7 +7,9 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._id = cardData._id;
+    this._userId = cardData.owner._id;
     this._handleDeleteBtnClick = handleDeleteBtnClick;
+    
   }
 
   _getTemplate() {
@@ -36,14 +38,25 @@ export default class Card {
     likeButton.classList.toggle('card__like_active');
   }
 
-  // removeDeleteIcon = () => {
-  //   this._deleteIcon = this._element.querySelector('.card__del-button');
-  //   this._deleteIcon.remove();
-  // }
+  handleRemoveDeleteIcon() {
+    this._deleteIcon = this._element.querySelector('.card__del-button');
+    console.log(this._deleteIcon)
+    this._deleteIcon.remove();
+  }
 
   getId() {
     return this._id;
   }
+
+  getUserId() {
+    return this._userId;
+  }
+
+  
+
+  // checkIfOwner() {
+  //   if (getId() === )
+  // }
 
   deleteCard() {
     this._element.remove();
