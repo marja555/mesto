@@ -25,6 +25,19 @@ const api = new Api({
   token: '046e1e7e-a85b-4246-8cd0-fe8501647960'
 });
 
+let myId = '';
+
+function getUserId() {
+  api.getUser()
+  .then((userData) => {
+    myId = userData._id
+    return myId;
+  })
+  .catch(err => console.log(err))
+}
+
+ console.log(myId)
+
 const popupSubmit = new PopupWithFormSubmit('.popup_type_submit');
 popupSubmit.setEventListeners();
 
@@ -33,7 +46,8 @@ function handleRender(data) { //функция для отрисовки люб�
     items: data,
     renderer: (item) => {
       const card = createCard(item);
-      cardsList.addItem(card)
+      cardsList.addItem(card);
+      
     },
   },
   cardsContainer
@@ -41,20 +55,21 @@ function handleRender(data) { //функция для отрисовки люб�
   return cardsList;
 }
 
+
+
 api.getCards()
   .then((cards) => {
     const cardsCreated = new Section({
       items: cards,
       renderer: (cardData) => {
         return cardData.likes.length;
-        cardData.handleRemoveDeleteIcon();
       }
     });
     cardsCreated.renderItems();
     handleRender(cards).renderItems();
   })
   .catch(err => console.log(err));
-
+  getUserId()
 
 const bigImage = new PopupWithImage('.popup_type_pic');
 bigImage.setEventListeners();
@@ -73,15 +88,10 @@ bigImage.setEventListeners();
 
 const popupPlace = new PopupWithForm({
   popupSelector: '.popup_type_place',
-  // handleFormSubmit: ({place, image}) => {
-  // const newCard = createCard({name: place, link: image});
-  // cardsList.prependItem(newCard);
-  // popupPlace.close();
-  // }
   handleFormSubmit: ({place, image}) => {
     api.addCard({place, image})
     .then((data) => {
-      const newCard = createCard({name: data.name, link: data.link});
+      const newCard = createCard(data);
       handleRender(data).prependItem(newCard);
       popupPlace.close();
     })
@@ -97,10 +107,13 @@ const userInfo = new UserInfo({
 });
 
 api.getUser()
-  .then((data) => {
-    userInfo.getUserInfo(data);
+  .then((userData) => {
+    userInfo.getUserInfo(userData);
   })
   .catch(err => console.log(err))
+
+
+
 
 const popupProfile = new PopupWithForm({ 
   popupSelector: '.popup_type_profile',
@@ -139,12 +152,13 @@ function createCard(cardData) {
   handleDeleteBtnClick: () => {
     popupSubmit.open();
     popupSubmit.setSubmitAction( () => {
-      api.deleteCard(cardData._id)
+      api.deleteCard(card.getId())
         .then(()  => {
           card.deleteCard();
         })
      })
   },
+  userId: myId
 },
   '#cardTemplate');
   const cardElement = card.generate();

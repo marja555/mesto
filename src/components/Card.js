@@ -1,15 +1,16 @@
 
 export default class Card {
-  constructor ({ cardData, handleCardClick, handleDeleteBtnClick }, cardSelector) {
+  constructor ({ cardData, handleCardClick, handleDeleteBtnClick, userId }, cardSelector) {
     this._image = cardData.link;
     this._title = cardData.name;
     this._likesCounter = cardData.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._id = cardData._id;
-    this._userId = cardData.owner._id;
-    this._handleDeleteBtnClick = handleDeleteBtnClick;
-    
+    this._userId = userId;
+    console.log(this._userId)
+    this._ownerId = cardData.owner._id;
+    this._handleDeleteBtnClick = handleDeleteBtnClick;    
   }
 
   _getTemplate() {
@@ -29,6 +30,7 @@ export default class Card {
     this._element.querySelector('.card__title').textContent = this._title;
     this._element.querySelector('.card__likes-counter').textContent = this._likesCounter.length;
     this._setEventListeners();
+    this._checkIfOwnerCard();
 
     return this._element;
   }
@@ -38,25 +40,19 @@ export default class Card {
     likeButton.classList.toggle('card__like_active');
   }
 
-  handleRemoveDeleteIcon() {
+  _checkIfOwnerCard() {
+    if (this._userId !== this._ownerId)
+      this._handleRemoveDeleteIcon()
+  }
+
+  _handleRemoveDeleteIcon() {
     this._deleteIcon = this._element.querySelector('.card__del-button');
-    console.log(this._deleteIcon)
     this._deleteIcon.remove();
   }
 
   getId() {
     return this._id;
   }
-
-  getUserId() {
-    return this._userId;
-  }
-
-  
-
-  // checkIfOwner() {
-  //   if (getId() === )
-  // }
 
   deleteCard() {
     this._element.remove();
