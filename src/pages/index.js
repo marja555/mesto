@@ -4,12 +4,10 @@ import {
   editButton,
   formProfileElement,
   formPlaceElement,
-  nameInput,
-  jobInput,
   profileName,
   profileProfession,
   addButton,
-  cardsContainer
+  cardsContainer,
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
@@ -25,21 +23,35 @@ const api = new Api({
   token: '046e1e7e-a85b-4246-8cd0-fe8501647960'
 });
 
-let myId = '';
+// let myId = '';
 
-function getUserId() {
-  api.getUser()
-  .then((userData) => {
-    myId = userData._id
-    return myId;
-  })
-  .catch(err => console.log(err))
-}
+// function getUserId() {
+//   api.getUser()
+//   .then((userData) => {
+//     myId = userData._id
+//     return myId;
+//   })
+//   .catch(err => console.log(err))
+// }
 
- console.log(myId)
+ //console.log(myId)
 
 const popupSubmit = new PopupWithFormSubmit('.popup_type_submit');
 popupSubmit.setEventListeners();
+
+const popupEditAvatar = new PopupWithForm({
+  popupSelector: '.popup_type_avatar-edit',
+  handleFormSubmit: (avatar) => {
+    api.editAvatar(avatar)
+      .then((res) => {
+        userInfo.setAvatar(res.avatar);
+        console.log(res.avatar)
+      })
+      .then(() => popupEditAvatar.close())
+      .catch(err => console.log(`Не удалось изменить аватар, ошибка: ${err}`))
+  }
+})
+popupEditAvatar.setEventListeners();
 
 function handleRender(data) { //функция для отрисовки любых карточек
   const cardsList = new Section({
@@ -55,36 +67,16 @@ function handleRender(data) { //функция для отрисовки люб�
   return cardsList;
 }
 
-
-
 api.getCards()
   .then((cards) => {
-    const cardsCreated = new Section({
-      items: cards,
-      renderer: (cardData) => {
-        return cardData.likes.length;
-      }
-    });
-    cardsCreated.renderItems();
     handleRender(cards).renderItems();
   })
   .catch(err => console.log(err));
-  getUserId()
+
+ // getUserId()
 
 const bigImage = new PopupWithImage('.popup_type_pic');
 bigImage.setEventListeners();
-
-// const cardsList = new Section ({
-//   items: initialCards,
-//   renderer: (item) => {
-//     const card = createCard(item);
-//     cardsList.addItem(card);
-//   },
-// },
-// cardsContainer
-// );
-
-// cardsList.renderItems();
 
 const popupPlace = new PopupWithForm({
   popupSelector: '.popup_type_place',
@@ -93,8 +85,8 @@ const popupPlace = new PopupWithForm({
     .then((data) => {
       const newCard = createCard(data);
       handleRender(data).prependItem(newCard);
-      popupPlace.close();
     })
+    .then(() =>popupPlace.close())
     .catch(err => console.log(`Ошибка при создании карточки ${err}`))
   }   
 });
@@ -109,11 +101,9 @@ const userInfo = new UserInfo({
 api.getUser()
   .then((userData) => {
     userInfo.getUserInfo(userData);
+    userInfo.setUserId(userData._id);
   })
   .catch(err => console.log(err))
-
-
-
 
 const popupProfile = new PopupWithForm({ 
   popupSelector: '.popup_type_profile',
@@ -121,8 +111,9 @@ const popupProfile = new PopupWithForm({
     api.editUserInfo({name, job})
       .then((data) => {
         userInfo.setUserInfo(data);
-        popupProfile.close();
+        
       })
+      .then(() => popupProfile.close())
       .catch(err => `Не удалось отредактировать профиль, ошибка ${err}`)
   }
 });
@@ -130,9 +121,7 @@ popupProfile.setEventListeners();
 
 function openPopupProfile () {
   popupProfile.open();
-  // const aboutUser = userInfo.getUserInfo();
-  //   nameInput.value = aboutUser.name;
-  //   jobInput.value = aboutUser.job;
+  
   profileFormValidation.removeInputError();
   profileFormValidation.setInactiveButton();
 }
@@ -140,6 +129,13 @@ function openPopupProfile () {
 function openPopupPlace () {
   popupPlace.open()
   
+  addFormValidation.removeInputError();
+  addFormValidation.setInactiveButton();
+}
+
+function openPopupEditAvatar() {
+  popupEditAvatar.open()
+
   addFormValidation.removeInputError();
   addFormValidation.setInactiveButton();
 }
@@ -156,14 +152,26 @@ function createCard(cardData) {
         .then(()  => {
           card.deleteCard();
         })
+        .catch(err => console.log(`Не удалось удалить карточку, ошибка: ${err}`))
      })
   },
-  userId: myId
+  handleLike: () => {
+    console.log('Hey')
+    api.updateLikeCard(cardData)
+        .then((likesData) => {
+          console.log(likesData)
+          card.updateLike(likesData)
+        })
+        .catch(err => console.log(`Не удалось поставить лайк, ошибка ${err}`))
+  },
+  userId: userInfo._id
 },
   '#cardTemplate');
   const cardElement = card.generate();
   return cardElement;
 }
+
+
 
 addButton.addEventListener('click', openPopupPlace);
 
@@ -176,3 +184,10 @@ addFormValidation.enableValidation();
 const profileFormValidation = 
       new FormValidator(formSelectors, formProfileElement);
 profileFormValidation.enableValidation();
+
+
+
+//const profileAvatar = document.querySelector('.profile__image');
+//console.log(avatar)
+
+profileAvatar.addEventListener('click', openPopupEditAvatar);

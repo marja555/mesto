@@ -44,4 +44,4 @@ export const profileProfession = document.querySelector('.profile__profession');
 export const profileAvatar = document.querySelector('.profile__image');
 export const addButton = document.querySelector('.profile__add-button');
 export const cardsContainer = document.querySelector('.cards');
-//export const popupOkButton = document.querySelector('.popup__yes');
+export const profileImage = document.querySelector('.profile__image');

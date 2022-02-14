@@ -7,24 +7,24 @@ export default class UserInfo {
 
   getUserInfo(data) {
     this.userData = {}
-
-    // this.userData.name = this._nameEl.textContent;
-    // this.userData.job = this._jobEl.textContent;
-    // this.userData.avatar = this._avatarEl.src;
     
     this._nameEl.textContent = data.name;
     this._jobEl.textContent = data.about;
-    this._avatarEl.src = data.avatar;
+    this._avatarEl.style.backgroundImage = data.avatar;
 
     return this.userData;
   }
 
-  getUserId(data) {
-    return data._id;
+  setUserId(id) {
+    this._id = id;
   }
 
   setUserInfo({ name, about }) {
     this._nameEl.textContent = name;
     this._jobEl.textContent = about;
+  }
+
+  setAvatar(avatar) {
+    this._avatarEl.style.backgroundImage = `url(${avatar})`;
   }
 }

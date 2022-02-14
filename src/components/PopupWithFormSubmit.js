@@ -8,7 +8,6 @@ export default class PopupWithFormSubmit extends Popup {
 
   setSubmitAction(actionFunc) {
     this._handleSubmitCallback = actionFunc;
-    console.log(this)
   }
 
   setEventListeners() {

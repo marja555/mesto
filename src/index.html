@@ -13,7 +13,7 @@
       <main>
         <section class="profile">
           <div class="profile__info">
-            <img class="profile__image" alt="Жак Кусто">
+            <div class="profile__image"></div>
             <div class="profile__info-container">
               <h1 class="profile__name"></h1>
               <button type="button" class="profile__edit-button"></button>
@@ -90,10 +90,24 @@
       <div class="popup__overlay"></div>
       <div class="popup__container">
         <form name="submit-form" class="popup__form popup__form_type_submit" novalidate>
-          <h2 class="popup__question">Вы уверены?</h2>
+          <h3 class="popup__question">Вы уверены?</h3>
           <button type="submit" class="popup__yes">Да</button>
-          <button type="button" class="popup__close"></button>
         </form>
+        <button type="button" class="popup__close"></button>
+      </div>
+    </div>
+    <div class="popup popup_type_avatar-edit">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <form name="avatar-edit-form" class="popup__form popup__form_type_edit" novalidate>
+          <h3 class="popup__edit-avatar">Обновить аватар</h3>
+          <input id="avatar-input" type="url" name="avatar" value=""
+            placeholder="Ссылка для аватара" size="40"
+            class="popup__input popup__input_type_avatar" required>
+          <span id="avatar-input-error" class="popup__input-error"></span>
+          <button type="submit" class="popup__submit-button">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close"></button>
       </div>
     </div>
   </body>
