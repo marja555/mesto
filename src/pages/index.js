@@ -17,7 +17,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-import PopupWithConfirmation from '../components/PopupWithFormSubmit';
+import PopupWithConfirmation from '../components/PopupWithConfirmation';
 import { renderLoading } from '../utils/constants.js';
 
 const api = new Api({
