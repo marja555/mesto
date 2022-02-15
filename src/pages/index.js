@@ -155,11 +155,9 @@ function createCard(cardData) {
         .catch(err => console.log(`Не удалось удалить карточку, ошибка: ${err}`))
      })
   },
-  handleLike: () => {
-    console.log('Hey')
+  handleLike: (cardData) => {
     api.updateLikeCard(cardData)
         .then((likesData) => {
-          console.log(likesData)
           card.updateLike(likesData)
         })
         .catch(err => console.log(`Не удалось поставить лайк, ошибка ${err}`))
@@ -170,8 +168,6 @@ function createCard(cardData) {
   const cardElement = card.generate();
   return cardElement;
 }
-
-
 
 addButton.addEventListener('click', openPopupPlace);
 
@@ -184,10 +180,5 @@ addFormValidation.enableValidation();
 const profileFormValidation = 
       new FormValidator(formSelectors, formProfileElement);
 profileFormValidation.enableValidation();
-
-
-
-//const profileAvatar = document.querySelector('.profile__image');
-//console.log(avatar)
 
 profileAvatar.addEventListener('click', openPopupEditAvatar);

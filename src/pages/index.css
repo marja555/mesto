@@ -39,9 +39,7 @@
 @import url(../blocks/popup/_type/popup_type_submit.css);
 @import url(../blocks/popup/_type/popup_type_avatar-edit.css);
 @import url(../blocks/popup/__form/_type/popup__form_type_edit.css);
-@import url(../blocks/popup/__edit-avatar/popup__edit-avatar.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_avatar.css);
-@import url(../blocks/popup/__question/popup__question.css);
 @import url(../blocks/popup/__yes/popup__yes.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);

@@ -3,7 +3,7 @@
   background-color: #fff;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr max-content;
+  grid-template-columns: 1fr 62px;
   grid-template-rows: 1fr 1fr;
   align-items: center;
 }

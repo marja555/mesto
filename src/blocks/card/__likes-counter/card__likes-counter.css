@@ -1,3 +1,8 @@
 .card__likes-counter {
   color: black;
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+
+  padding-top: 3px;
 }

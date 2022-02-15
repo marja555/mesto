@@ -80,6 +80,10 @@ export default class Api {
     .then(this._handleResponse)
   }
 
+  updateLikeCard({ _isLiked, _id }) {
+    return _isLiked ? this._deleteLike(_id) : this._addLike(_id);
+  }
+
   _addLike(_id) {
     return fetch(`${this._adress}/cards/${_id}/likes`, {
       method: 'PUT',
@@ -101,4 +105,6 @@ export default class Api {
     })
     .then(this._handleResponse)
   }
+
+  
 }
