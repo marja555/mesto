@@ -17,7 +17,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-import PopupWithFormSubmit from '../components/PopupWithFormSubmit';
+import PopupWithConfirmation from '../components/PopupWithFormSubmit';
 import { renderLoading } from '../utils/constants.js';
 
 const api = new Api({
@@ -25,7 +25,7 @@ const api = new Api({
   token: '046e1e7e-a85b-4246-8cd0-fe8501647960'
 });
 
-const popupSubmit = new PopupWithFormSubmit('.popup_type_submit');
+const popupSubmit = new PopupWithConfirmation('.popup_type_submit');
 popupSubmit.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm({
