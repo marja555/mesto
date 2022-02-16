@@ -1,4 +1,3 @@
-
 export default class Api {
   constructor({adress, token}) {
     this._adress = adress;
@@ -105,6 +104,4 @@ export default class Api {
     })
     .then(this._handleResponse)
   }
-
-  
 }
