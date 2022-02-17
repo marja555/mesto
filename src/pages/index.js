@@ -76,7 +76,7 @@ const popupPlace = new PopupWithForm({
       popupPlace.close();
     })
     .catch(err => console.log(`Ошибка при создании карточки ${err}`))
-    .finally(() => popupPlace.renderLoading('Сохранить'))
+    .finally(() => popupPlace.renderLoading('Создать'))
   }   
 });
 
