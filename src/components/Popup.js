@@ -3,6 +3,7 @@ export default class Popup {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
     this._submitButton = this._popup.querySelector('.popup__submit-button');
+    this._closePopupBtn = this._popup.querySelector('.popup__close');
   }
 
   open() {
@@ -23,13 +24,12 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._closePopupBtn = this._popup.querySelector('.popup__close');
     this._closePopupBtn.addEventListener('click', () => {
       this.close();
     });
 
     const popupOverlay = this._popup.querySelector('.popup__overlay');
-    popupOverlay.addEventListener('click', () => {
+    popupOverlay.addEventListener('mousedown ', () => {
       this.close();
     })
   }

@@ -5,26 +5,29 @@ export default class UserInfo {
     this._avatarEl = avatarEl;
   }
 
-  getUserInfo(data) {
+  getUserInfo() {
     this.userData = {}
-    
-    this._nameEl.textContent = data.name;
-    this._jobEl.textContent = data.about;
-    this._avatarEl.style.backgroundImage = data.avatar;
+
+    this.userData.name = this._nameEl.textContent;
+    this.userData.about = this._jobEl.textContent;
+    this.userData.avatar = this._avatarEl.style.backgroundImage;
+    this.userData._id = this._id;
 
     return this.userData;
   }
 
-  setUserId(id) {
-    this._id = id;
-  }
+  // setUserId(id) {
+  //   this._id = id;
+  // }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about, avatar, _id }) {
     this._nameEl.textContent = name;
     this._jobEl.textContent = about;
+    this._avatarEl.style.backgroundImage = `url(${avatar})`;
+    this._id = _id;
   }
 
-  setAvatar(avatar) {
-    this._avatarEl.style.backgroundImage = `url(${avatar})`;
-  }
+  // setAvatar(avatar) {
+  //   this._avatarEl.style.backgroundImage = `url(${avatar})`;
+  // }
 }
