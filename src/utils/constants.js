@@ -19,11 +19,3 @@ export const profileAvatar = document.querySelector('.profile__image');
 export const addButton = document.querySelector('.profile__add-button');
 export const cardsContainer = document.querySelector('.cards');
 export const profileImage = document.querySelector('.profile__image');
-
-export const renderLoading = (isLoading, caption, button) => {
-  if (isLoading) {
-    button.textContent = 'Сохранение...';
-  } else {
-    button.textContent = caption;
-  }
-}

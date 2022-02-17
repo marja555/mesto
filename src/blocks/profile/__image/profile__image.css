@@ -3,7 +3,6 @@
   height: 120px;
   border-radius: 50%;
   background-size: cover;
-  background-image: url(../../../images/kusto.jpg);
   position: relative;
   pointer-events: none;
 }

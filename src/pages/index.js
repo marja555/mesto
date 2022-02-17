@@ -18,7 +18,6 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation';
-import { renderLoading } from '../utils/constants.js';
 
 const api = new Api({
   adress: 'https://mesto.nomoreparties.co/v1/cohort-35',
@@ -52,58 +51,58 @@ popupConfirmation.setEventListeners();
 const popupEditAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar-edit',
   handleFormSubmit: (avatar) => {
-    renderLoading(true, 'Сохранение...', popupEditAvatarSubmitBtn);
+    popupEditAvatar.renderLoading('Сохранение...');
     api.editAvatar(avatar)
       .then((userData) => {
         userInfo.setUserInfo(userData);
-        console.log(avatar)
       })
       .then(() => popupEditAvatar.close())
       .catch(err => console.log(`Не удалось изменить аватар, ошибка: ${err}`))
+      .finally(() => popupEditAvatar.renderLoading('Сохранить'))
   }
 })
-popupEditAvatar.setEventListeners();
 
-const bigImage = new PopupWithImage('.popup_type_pic');
-bigImage.setEventListeners();
+popupEditAvatar.setEventListeners();
 
 const popupPlace = new PopupWithForm({
   popupSelector: '.popup_type_place',
   handleFormSubmit: ({place, image}) => {
-    renderLoading(true, 'Сохранение...', popupPlaceSubmitButton);
+    popupPlace.renderLoading('Сохранение...');
 
     api.addCard({place, image})
     .then((data) => {
       const newCard = createCard(data);
       cardsList.prependItem(newCard);
+      popupPlace.close();
     })
-    .then(() =>popupPlace.close())
     .catch(err => console.log(`Ошибка при создании карточки ${err}`))
+    .finally(() => popupPlace.renderLoading('Сохранить'))
   }   
 });
+
 popupPlace.setEventListeners();
 
-const popupProfile = new PopupWithForm({ 
+const popupProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: ({name, job}) => {
-    renderLoading(true, 'Сохранение...', popupProfileSubmitButton);
+    popupProfile.renderLoading('Сохранение...');
 
     api.editUserInfo({name, job})
       .then((data) => {
         userInfo.setUserInfo(data);
+        popupProfile.close()
       })
-      .then(() => popupProfile.close())
       .catch(err => `Не удалось отредактировать профиль, ошибка ${err}`)
+      .finally(() => popupProfile.renderLoading('Сохранить'))
   }
 });
+
 popupProfile.setEventListeners();
 
-const popupProfileSubmitButton = popupProfile.getSubmitButton();
-const popupPlaceSubmitButton = popupPlace.getSubmitButton();
-const popupEditAvatarSubmitBtn = popupEditAvatar.getSubmitButton();
+const bigImage = new PopupWithImage('.popup_type_pic');
+bigImage.setEventListeners();
 
 function openPopupProfile () {
-  renderLoading(false, 'Сохранить', popupProfileSubmitButton);
   
   const currentUserInfo = userInfo.getUserInfo();
   
@@ -117,7 +116,6 @@ function openPopupProfile () {
 
 function openPopupPlace () {
   popupPlace.open()
-  renderLoading(false, 'Сохранить', popupPlaceSubmitButton);
   
   addFormValidation.removeInputError();
   addFormValidation.setInactiveButton();
@@ -125,7 +123,6 @@ function openPopupPlace () {
 
 function openPopupEditAvatar() {
   popupEditAvatar.open()
-  renderLoading(false, 'Сохранить', popupEditAvatarSubmitBtn);
 
   editAvatarFormValidation.removeInputError();
   editAvatarFormValidation.setInactiveButton();
