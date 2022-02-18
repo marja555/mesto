@@ -28,7 +28,7 @@ export default class Popup {
     });
 
     const popupOverlay = this._popup.querySelector('.popup__overlay');
-    popupOverlay.addEventListener('mousedown ', () => {
+    popupOverlay.addEventListener('mousedown', () => {
       this.close();
     })
   }
